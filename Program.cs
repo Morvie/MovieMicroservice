@@ -1,4 +1,4 @@
-using MovieMicroservice.Interface;
+using MovieMicroservice.Interface.Service;
 using MovieMicroservice.Service;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 //Dependency injection
 builder.Services.AddScoped<IMovieService, MovieService>();
+builder.Services.AddScoped<ICreditsService, CreditsService>();
 
 builder.Services.AddControllers();
 

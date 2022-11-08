@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MovieMicroservice.Interface;
+using MovieMicroservice.Interface.Service;
 using MovieMicroservice.Models;
 using Nancy;
+using static MovieMicroservice.Models.MovieDetailModel;
 
 namespace MovieMicroservice.Controllers
 {
@@ -14,19 +15,24 @@ namespace MovieMicroservice.Controllers
         {
             _context = context;
         }
-        [HttpGet]
+        [HttpGet("Popular")]
         public async Task<ActionResult<List<Rootobject>>> GetPopularMovies()
         {
             string type = "popular";
             return Ok(await _context.GetMovies(type));
         }
 
-        [HttpGet]
+        [HttpGet("Upcoming")]
         public async Task<ActionResult<List<Rootobject>>> GetUpcomingMovies()
         {
             string type = "upcoming";
             return Ok(await _context.GetMovies(type));
+        }
 
+        [HttpGet("details/{id}")]
+        public async Task<ActionResult<List<DetailedMovie>>> GetMovieDetails(int id)
+        {
+            return Ok(await _context.GetMovieDetails(id));
         }
 
     }
