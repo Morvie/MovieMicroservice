@@ -24,7 +24,7 @@ jobs:
     - name: Build
       run: dotnet build MovieMicroservice.sln --no-restore
     - name: Test
-      run: dotnet test /MovieMicroservice.sln --no-build --verbosity normal
+      run: dotnet test MovieMicroservice.sln --no-build --verbosity normal
 
   deploy:
     needs: [build]
