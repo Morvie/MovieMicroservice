@@ -28,9 +28,7 @@ jobs:
       run: dotnet test --no-build --verbosity normal
 
   deploy:
-    project: MovieMicroservice.sln
-    runs-on: ubuntu-latest
-    
+    runs-on: ubuntu-latest    
     steps:
       - name: Checkout
         uses: actions/checkout@v3
