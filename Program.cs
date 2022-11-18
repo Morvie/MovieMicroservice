@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration
     .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-    .AddJsonFile("secrets/appsettings.json", optional: true, reloadOnChange: true)
+    .AddJsonFile("/app/secrets/appsettings.json", optional: true, reloadOnChange: true)
     .AddEnvironmentVariables();
     
 //Dependency injection
