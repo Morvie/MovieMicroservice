@@ -17,14 +17,15 @@ namespace MovieMicroservice.Service
             var httpClient = new HttpClient();
             var baseURL = _configuration.GetValue<string>("API:BaseURL");
             var API_key = _configuration.GetValue<string>("API:API_key");
-            
-            var response = await httpClient.GetAsync(baseURL + "/movie/"+ type +"?api_key=" + API_key);
+            var url = baseURL + "/movie/"+ type +"?api_key=" + API_key;
+
+            var response = await httpClient.GetAsync(url);
             if (!response.IsSuccessStatusCode)
             {
+                System.Console.WriteLine("Cannot get respone from; " + url);  
                 return null;
             }
             var jsonData = await response.Content.ReadAsStringAsync();
-
 
             Rootobject movieModel = 
                 JsonSerializer.Deserialize<Rootobject>(jsonData);

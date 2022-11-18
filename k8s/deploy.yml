@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: movie-api-deployment
+  labels:
+    app: movie-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: movie-api
+  template:
+    metadata:
+      labels:
+        app: movie-api
+    spec:
+      containers:
+        - name: movie-api
+          image: markgoertz/clockbox:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80

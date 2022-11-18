@@ -3,7 +3,7 @@
   <PropertyGroup Label="Globals">
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
-    <ProjectGuid>98ab4650-0b3f-4060-b274-ecc93727ab9f</ProjectGuid>
+    <ProjectGuid>747aee4d-1821-455f-bb35-4affc7715438</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
     <DockerServiceName>moviemicroservice</DockerServiceName>
