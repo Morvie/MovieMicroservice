@@ -30,4 +30,4 @@ spec:
       volumes:
       - name: secrets
         secret:
-          secretName: secret-appsettings
+          secretName: appsettings

@@ -10,6 +10,7 @@ COPY ["MovieMicroservice.csproj", "."]
 RUN dotnet restore "./MovieMicroservice.csproj"
 COPY . .
 WORKDIR "/src/."
+COPY MovieMicroservice/appsettings.json /app/Appsettings.json
 RUN dotnet build "MovieMicroservice.csproj" -c Release -o /app/build
 
 FROM build AS publish
