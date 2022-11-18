@@ -32,4 +32,9 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+app.Run(async (context) =>
+{
+    var message = $"Host: {Environment.MachineName}\n" +
+        $"Secret value: {builder.Configuration["API:BaseURL"]}";
+    await context.Response.WriteAsync(message);
+});
