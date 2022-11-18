@@ -5,7 +5,7 @@ metadata:
   labels:
     app: movie-api
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: movie-api
@@ -30,4 +30,4 @@ spec:
       volumes:
       - name: secrets
         secret:
-          secretName: appsettings
+          secretName: secret-appsettings
