@@ -15,8 +15,8 @@ namespace MovieMicroservice.Service
         public async Task<Rootobject> GetMovies(string type)
         {
             var httpClient = new HttpClient();
-            var baseURL = _configuration.GetValue<string>("API:BaseURL");
-            var API_key = _configuration.GetValue<string>("API:API_key");
+            var baseURL = _configuration.GetSection("API:BaseURL");
+            var API_key = _configuration.GetSection("API:API_key");
             var url = baseURL + "/movie/"+ type +"?api_key=" + API_key;
 
             var response = await httpClient.GetAsync(url);

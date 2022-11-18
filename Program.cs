@@ -3,8 +3,11 @@ using MovieMicroservice.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
+builder.Configuration
+    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+    .AddJsonFile("secrets/appsettings.json", optional: true, reloadOnChange: true)
+    .AddEnvironmentVariables();
+    
 //Dependency injection
 builder.Services.AddScoped<IMovieService, MovieService>();
 builder.Services.AddScoped<ICreditsService, CreditsService>();
