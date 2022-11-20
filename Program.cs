@@ -4,8 +4,9 @@ using MovieMicroservice.Service;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration
-    .AddJsonFile("/secrets/appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile("settings/appsettings.docker.json", optional: true)
     .AddEnvironmentVariables();
+   
     
 //Dependency injection
 builder.Services.AddScoped<IMovieService, MovieService>();

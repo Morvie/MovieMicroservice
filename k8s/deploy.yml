@@ -24,10 +24,10 @@ spec:
           - name: "ASPNETCORE_ENVIRONMENT"
             value: "Kubernetes"
           volumeMounts:
-          - name: secrets
-            mountPath: /app/secrets
+          - name: settings
+            mountPath: /app/settings
             readOnly: true
       volumes:
-      - name: secrets
+      - name: settings
         secret:
-          secretName: appsettings
+          secretName: movie-docker-appsettings
