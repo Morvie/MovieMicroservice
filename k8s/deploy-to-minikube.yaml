@@ -2,15 +2,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: movie-api-deployment
+  namespace: morvie-namespace
+  annotations:
+    team: morvie-team
   labels:
     app: movie-api
 spec:
   replicas: 1
+  minReadySeconds: 15
   selector:
     matchLabels:
       app: movie-api
   template:
     metadata:
+      namespace: morvie-namespace
       labels:
         app: movie-api
     spec:
@@ -18,6 +23,16 @@ spec:
         - name: movie-api
           image: markgoertz/clockbox:latest
           imagePullPolicy: Always
+          securityContext:
+            runAsNonRoot: true
+            readOnlyRootFilesystem: true
+          resources:
+            limits:
+              cpu: 50m
+              memory: 100Mi
+            requests:
+              cpu: 25m
+              memory: 10Mi
           ports:
           - containerPort: 80
           env:

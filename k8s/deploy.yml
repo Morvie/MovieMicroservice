@@ -18,6 +18,13 @@ spec:
         - name: movie-api
           image: markgoertz/clockbox:latest
           imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: 50m
+              memory: 100Mi
+            requests:
+              cpu: 25m
+              memory: 10Mi
           ports:
           - containerPort: 80
           env:
