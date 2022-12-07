@@ -72,4 +72,4 @@ jobs:
         minikube service list
         minikube service movie-api-service --url
         echo "------------------opening the service------------------"
-        curl $(minikube service movie-api --url)   
+        curl $(minikube service mmovie-api-service --url)   
