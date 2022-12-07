@@ -70,6 +70,6 @@ jobs:
     - name: Test service URLs
       run: |
         minikube service list
-        minikube service movie-api --url
+        minikube service movie-api-service --url
         echo "------------------opening the service------------------"
         curl $(minikube service movie-api --url)   
