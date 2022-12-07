@@ -1,39 +1,48 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: forums
+  name: movie-api-deployment
+  labels:
+    app: movie-api
 spec:
-    selector:
-        matchLabels:
-            app: movie-api
-    replicas: 2
-    template:
-        metadata:
-            labels:
-                app: movie-api
-        spec:
-            containers:
-                - name: movie-api
-                  imagePullPolicy: Never
-                  image: markgoertz/clockbox:latest
-                  resources:
-                      limits:
-                          cpu: 50m
-                          memory: 100Mi
-                      requests:
-                          cpu: 25m
-                          memory: 10Mi
-                  ports:
-                      - containerPort: 80
+  replicas: 1
+  selector:
+    matchLabels:
+      app: movie-api
+  template:
+    metadata:
+      labels:
+        app: movie-api
+    spec:
+      containers:
+        - name: movie-api
+          image: markgoertz/clockbox:latest
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 80
+          env:
+          - name: "ASPNETCORE_ENVIRONMENT"
+            value: "Kubernetes"
+          volumeMounts:
+          - name: settings
+            mountPath: /app/settings
+            readOnly: true
+      volumes:
+      - name: settings
+        secret:
+          secretName: movie-docker-appsettings
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
-    name: movie-api
+  name: movie-api-service
+  labels:
+    app: movie-api
 spec:
-    type: LoadBalancer
-    selector:
-        app: movie-api
-    ports:
-        - port: 80
-          targetPort: 80
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    app: movie-api
+  type: LoadBalancer
