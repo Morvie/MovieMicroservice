@@ -26,7 +26,7 @@ jobs:
     - name: Test
       run: dotnet test MovieMicroservice.sln --no-build --verbosity normal
 
-  deploy:
+  Docker:
     needs: [build]
     runs-on: ubuntu-latest    
     steps:
@@ -46,3 +46,30 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/clockbox:latest
+
+  deploy-to-minikube:
+    needs:  [Docker]
+    runs-on: ubuntu-latest
+    name: build and deploy to minikube
+    steps:
+    - uses: actions/checkout@v2
+    - name: Start minikube
+      uses: medyagh/setup-minikube@master
+    - name: Try the cluster !
+      run: kubectl get pods -A
+    - name: Build image
+      run: |
+        export SHELL=/bin/bash
+        eval $(minikube -p minikube docker-env)
+        docker build -f ./Forums/Dockerfile -t markgoertz/clockbox .
+        echo -n "verifying images:"
+        docker images        
+    - name: Deploy to minikube
+      run:
+        kubectl apply -f k8s/deploy-to-minikube.yaml    
+    - name: Test service URLs
+      run: |
+        minikube service list
+        minikube service forums --url
+        echo "------------------opening the service------------------"
+        curl $(minikube service forums --url)   
