@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: movie-api
-          image: markgoertz/clockbox:latest
+          image: markgoertz/clockbox
           imagePullPolicy: Always
           securityContext:
             runAsNonRoot: true
@@ -52,6 +52,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: movie-api-service
+  namespace: morvie-namespace
   labels:
     app: movie-api
 spec:
