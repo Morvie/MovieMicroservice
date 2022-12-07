@@ -5,17 +5,17 @@ metadata:
 spec:
     selector:
         matchLabels:
-            app: forums
+            app: movie-api
     replicas: 2
     template:
         metadata:
             labels:
-                app: forums
+                app: movie-api
         spec:
             containers:
-                - name: forums-api
+                - name: movie-api
                   imagePullPolicy: Never
-                  image: local/forums:latest
+                  image: markgoertz/clockbox:latest
                   resources:
                       limits:
                           cpu: 50m
@@ -29,11 +29,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-    name: forums
+    name: movie-api
 spec:
     type: LoadBalancer
     selector:
-        app: forums
+        app: movie-api
     ports:
         - port: 80
           targetPort: 80
