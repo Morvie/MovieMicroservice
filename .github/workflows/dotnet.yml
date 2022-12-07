@@ -67,9 +67,3 @@ jobs:
     - name: Deploy to minikube
       run:
         kubectl apply -f k8s/deploy-to-minikube.yaml    
-    - name: Test service URLs
-      run: |
-        minikube service list
-        minikube service movie-api-service --url
-        echo "------------------opening the service------------------"
-        curl $(minikube service movie-api-service --url)   
