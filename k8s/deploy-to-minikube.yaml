@@ -46,7 +46,6 @@ spec:
       - name: settings
         secret:
           secretName: movie-docker-appsettings
-
 ---
 apiVersion: v1
 kind: Service
