@@ -47,10 +47,3 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/clockbox:latest
 
-  deploy-to-minikube:
-    - name: Scan yamls
-      id: kube-lint-scan
-      uses: stackrox/kube-linter-action@v1
-      with:
-        directory: k8s
-        config: .kube-linter/config.yaml
