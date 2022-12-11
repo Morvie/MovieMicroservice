@@ -13,6 +13,7 @@ namespace MovieMicroservice.Controllers
         {
             _configuration = configuration;
         }
+        [HttpGet]
         public string Index()
         {
             var baseURL = _configuration.GetValue<string>("API:BaseURL");
