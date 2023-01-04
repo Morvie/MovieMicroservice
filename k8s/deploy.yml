@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: movie-api-deployment
+  name: feeds-api
   labels:
     app: movie-api
 spec:
@@ -16,25 +16,14 @@ spec:
     spec:
       containers:
         - name: movie-api
-          image: markgoertz/clockbox:latest
+          image: markgoertz/moviemicroservice:latest
           imagePullPolicy: Always
-          resources:
-            limits:
-              cpu: 50m
-              memory: 100Mi
-            requests:
-              cpu: 25m
-              memory: 10Mi
           ports:
-          - containerPort: 80
-          env:
-          - name: "ASPNETCORE_ENVIRONMENT"
-            value: "Kubernetes"
-          volumeMounts:
-          - name: settings
-            mountPath: /app/settings
-            readOnly: true
-      volumes:
-      - name: settings
-        secret:
-          secretName: movie-docker-appsettings
+          - containerPort: 443
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 200m
+              memory: 200Mi

@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: morvie-ingress
+  namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+      - path: /feeds-service(/|$)(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: feeds-api-service
+            port:
+              number: 443
+              
+      - path: /movie-service(/|$)(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: movie-api-service
+            port:
+              number: 443
