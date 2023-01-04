@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: feeds-api
+  name: movie-api
   labels:
     app: movie-api
 spec:
