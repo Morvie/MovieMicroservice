@@ -1,0 +1,62 @@
+{
+	"info": {
+		"_postman_id": "107048ba-01c4-45e7-b381-e92642190084",
+		"name": "Morvie",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18281405"
+	},
+	"item": [
+		{
+			"name": "MovieMicroservice",
+			"item": [
+				{
+					"name": "Get popular movie",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"page\");\r",
+									"    pm.expect(pm.response.text()).to.include(\"original_title\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7182/api/movie/popular",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7182",
+							"path": [
+								"api",
+								"movie",
+								"popular"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get upcoming movies",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
